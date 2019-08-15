@@ -1,6 +1,6 @@
-let gradeCalc = function(score, possScore) {
-    let percentage = (score / possScore) * 100
-    let grade
+const gradeCalc = function(score, possScore) {
+    const percentage = (score / possScore) * 100
+    let grade = ''
     if (percentage <= 59) {
         grade = 'F'
     } else if (percentage <= 69) {
@@ -16,5 +16,5 @@ let gradeCalc = function(score, possScore) {
     return `${score}/${possScore} -> You got a ${grade} (${percentage}%)`
 }
 
-let result = gradeCalc(79, 100)
+const result = gradeCalc(79, 100)
 console.log(result)
