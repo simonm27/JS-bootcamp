@@ -5,11 +5,23 @@
     </head>
     <body>
         <h1>Things to do</h1>
-        <input type="text" id="new-todo" placeholder="Add new todo here" /> 
-        <button id='add-todo'>Add Todo</button>
+        <br />
+        <label>
+            <input type="checkbox" id="hide-completed" /> Hide Completed Todos
+        </label>
+        <br />
+        <br />
+        <input type="text" id="search-todos" placeholder="Search todos" />
+        <div id="app">
+            <!--Todos rendered here-->
+        </div>
+        <form id="add-todo-form">
+            <input type="text" placeholder="Add Todo" name="addTodo"/>
+            <button>Add ToDo</button>
+        </form>
 
-
-
+        <script src="uuidv4.js"></script>
+        <script src="todo-functions.js"></script>
         <script src="todo-app.js"></script>
     </body>
 </html>

@@ -1,44 +1,34 @@
-const todos = [{
-    text: 'Cut the lawn',
-    completed: true
-}, {
-    text: 'Feed the cat',
-    completed: false
-}, {
-    text: 'Wash the car',
-    completed: true
-}, {
-    text: 'Learn javascript',
-    completed: false
-}, {
-    text: 'Cook tea',
-    completed: true
+let todos = getSavedTodos()
+
+const filter = {
+    searchText: '',
+    hideCompleted: false
 }
-]
 
-//Calculate number of incomplete todos
-const incompleteTodos = todos.filter(function(todo) {
-    return !todo.completed
+//Render todos and summary
+renderTodos(todos, filter)
+
+document.querySelector('#search-todos').addEventListener('input', function(e) {
+    filter.searchText = e.target.value
+    renderTodos(todos, filter)
 })
 
-//Render number of incomplete todos
-const summary = document.createElement('h2')
-summary.textContent = `You have ${incompleteTodos.length} todos left`
-document.querySelector('body').appendChild(summary)
+document.querySelector('#add-todo-form').addEventListener('submit', function(e) {
+    e.preventDefault()
+    todos.push({
+        id: uuidv4(),
+        text: e.target.elements.addTodo.value,
+        completed: false
+    })
 
-//List todos
-todos.forEach(function(todo) {
-        let p = document.createElement('p')
-        p.textContent = todo.text
-        document.querySelector('body').appendChild(p)
+    saveTodos(todos)
+
+    renderTodos(todos, filter)
+    
+    e.target.elements.addTodo.value = ''
 })
 
-//Listen for new todo creation
-document.querySelector('#add-todo').addEventListener('click', function(e) {
-    console.log('I was clicked')
-})
-
-// Listen for new todo text change
-document.querySelector('#new-todo').addEventListener('input', function(e) {
-    console.log(e.target.value)
+document.querySelector('#hide-completed').addEventListener('change', function(e) {
+    filter.hideCompleted = e.target.checked
+    renderTodos(todos, filter)
 })

@@ -9,12 +9,18 @@
         <h1>Notes app</h1>
         <h2>Take notes and never forget</h2>
         <input type="text" id="search-text" placeholder="Filter notes"/>
+        <select id="filter-by">
+            <option value="byEdited">Sort by last edited</option>
+            <option value="byCreated">Sort by recently created</option>
+            <option value="alphabetical">Sort alphabetically</option>
+        </select>
         <div id="app">
-
+            <!--List of notes go here-->
         </div>
         <button id="create-note">Create Note</button>
-        <button id="remove-notes">Remove all notes</button>
 
+        <script src="uuidv4.js"></script>
+        <script src="notes-functions.js"></script>
         <script src="notes-app.js"></script>
     </body>
 </html>
