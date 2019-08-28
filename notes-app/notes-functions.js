@@ -79,12 +79,11 @@ const sortNotes = function(notes, sortBy) {
                 return 1
             } else {
                 return 0
-            }
-        
-    })
-}   else {
-    return notes
-}
+            }  
+        })
+    }   else {
+        return notes
+    }
 }
 
 // Render application notes
