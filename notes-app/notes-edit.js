@@ -4,9 +4,7 @@ const noteBody = document.querySelector('#note-body')
 const lastEdited = document.querySelector('#last-edited')
 const noteID = location.hash.substring(1)
 let notes = getSavedNotes()
-let note = notes.find(function(note) {
-    return note.id === noteID
-})
+let note = notes.find((note) => note.id === noteID)
 
 if (note === undefined) {
     location.assign('/index.html')
@@ -19,14 +17,14 @@ lastEdited.textContent = generateLastEdited(note.updatedAt)
 
 
 //Save new note ttile to notes
-noteTitle.addEventListener('input', function(e) {
+noteTitle.addEventListener('input', (e) => {
     note.title = e.target.value
     note.updatedAt = moment().valueOf()
     lastEdited.textContent = generateLastEdited(note.updatedAt)
     saveNotes(notes)
 })
 
-noteBody.addEventListener('input', function(e) {
+noteBody.addEventListener('input', (e) => {
     note.body = e.target.value
     note.updatedAt = moment().valueOf()
     lastEdited.textContent = generateLastEdited(note.updatedAt)
@@ -40,7 +38,7 @@ document.querySelector('#remove-note').addEventListener('click', function(e) {
 })
 
 //Change rendered data if changes made to duplicate browser window
-window.addEventListener('storage', function(e) {
+window.addEventListener('storage', (e) => {
     if (e.key === 'notes') {
         notes = JSON.parse(e.newValue)
         note = notes.find(function(note) {
