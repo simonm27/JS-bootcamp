@@ -1,6 +1,11 @@
 const gradeCalc = function(score, possScore) {
+    if (typeof score !== 'number' || typeof possScore !== 'number') {
+        throw Error('Please enter a number')
+    }
+
     const percentage = (score / possScore) * 100
     let grade = ''
+
     if (percentage <= 59) {
         grade = 'F'
     } else if (percentage <= 69) {
@@ -16,5 +21,12 @@ const gradeCalc = function(score, possScore) {
     return `${score}/${possScore} -> You got a ${grade} (${percentage}%)`
 }
 
-const result = gradeCalc(79, 100)
-console.log(result)
+
+try {
+    const result = gradeCalc(56, 100)
+    console.log(result)
+} catch(e) {
+    console.log(e.message)
+}
+
+

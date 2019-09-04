@@ -1,10 +1,12 @@
+'use strict'
+
 //Check and load existing saved data from locat storage
 const getSavedNotes = () => {
-const notesJSON = localStorage.getItem('notes')
+    const notesJSON = localStorage.getItem('notes')
 
-    if (notesJSON !== null) {
-        return JSON.parse(notesJSON)
-    } else {
+    try {
+        return notesJSON !== null ? JSON.parse(notesJSON) : []
+    } catch(e) {
         return []
     }
 }
