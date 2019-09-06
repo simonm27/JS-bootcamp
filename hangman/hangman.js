@@ -23,14 +23,19 @@ Hangman.prototype.makeGuess = function(guess) {
     guess = guess.toLowerCase()
     const isUnique = !this.guessedLetters.includes(guess)
     const isBadGuess = !this.word.includes(guess)
-
-    if (isUnique) {
-        this.guessedLetters.push(guess)
+    if (this.status !== 'Playing') {
+        return
     }
-    if (isUnique && isBadGuess) {
-        this.numberOfGuesses --
-    } 
+        if (isUnique) {
+            this.guessedLetters.push(guess)
+        }
+        if (isUnique && isBadGuess) {
+            this.numberOfGuesses --
+        }
+    
+
     this.calculateStatus()
+
 }
 
 Hangman.prototype.calculateStatus = function() {
@@ -45,6 +50,17 @@ Hangman.prototype.calculateStatus = function() {
     }
 }
 
+Hangman.prototype.statusMessage = function() {
+    let message = ''
+    if (this.status === 'Playing') {
+        message = `Guesses left: ${this.numberOfGuesses}`
+    } else if (this.status === 'Failed') {
+        message = `Nice try! The word was "${this.word.join('')}"`
+    } else {
+        message = 'Great work, you guessed the word'
+    }
+    return message
+}
 
 const gameOne = new Hangman('Cat', 2)
 
