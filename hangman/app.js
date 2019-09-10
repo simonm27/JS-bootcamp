@@ -14,37 +14,21 @@ const guess = window.addEventListener('keypress', (e) => {
     gameOne.makeGuess(guess)
     puzzleEl.textContent = gameOne.puzzle
     guessEl.textContent = gameOne.statusMessage
-   // statusEl.textContent = `Game Status: ${status}`
 })
 
-//Making an http request
-const request = new XMLHttpRequest() 
-
-request.addEventListener('readystatechange', (e) => {
-    if (e.target.readyState === 4 && e.target.status === 200) {
-        const data = JSON.parse(e.target.responseText)
-        console.log(data)
-    } else if (e.target.readyState === 4) {
-        console.log('An error has taken place')
+getPuzzle("1", (error, puzzle) => {
+    if (error) {
+        console.log(`Error: ${error}`)
+    } else {
+        console.log(puzzle)
     }
 })
 
-request.open('GET', 'http://puzzle.mead.io/puzzle?wordCount=3')
-request.send()
-
-const countryCode = 'US'
-
-const request2 = new XMLHttpRequest()
-
-request2.addEventListener('readystatechange', (e) => {
-    if (e.target.readyState === 4 && e.target.status === 200) {
-        const data = JSON.parse(e.target.responseText)
-        let country = data.find((country) => country.alpha2Code === countryCode)
+getCountry("ES", (error, country) => {
+    if (error) {
+        console.log(`Error: ${error}`)
+    } else {
         console.log(country.name)
-        } else if (e.target.readyState === 4) {
-            console.log('Unable to fetch data')
-        }
+    }
 })
 
-request2.open('GET', 'http://restcountries.eu/rest/v2/all')
-request2.send()
