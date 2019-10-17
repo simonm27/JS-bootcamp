@@ -25,12 +25,12 @@ class Hangman {
         if (this.status !== 'Playing') {
             return
         }
-            if (isUnique) {
-                this.guessedLetters.push(guess)
-            }
-            if (isUnique && isBadGuess) {
-                this.numberOfGuesses --
-            }
+        if (isUnique) {
+            this.guessedLetters.push(guess)
+        }
+        if (isUnique && isBadGuess) {
+            this.numberOfGuesses --
+        }
         
     
         this.calculateStatus()
