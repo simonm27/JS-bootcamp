@@ -1,22 +1,46 @@
-// Set up index.html to load the bundle
-// Make sure to load uuid via an npm module when necessary
 
-// --
-
-// Add necessary imports
-
-// Render initial todos
-
-// Set up search text handler
-
-// Set up checkbox handler
-
-// Set up form submission handler
 
 // Bonus: Add a watcher for local storage
 
-import { getTodos, createTodo, removeTodo, toggleTodo } from './todos'
+import { renderTodos } from './views'
+import { setFilters } from './filters'
+import { createTodo, loadTodos } from './todos'
 
-console.log(getTodos())
-removeTodo('a4cfcba4-9da8-453f-afb4-b43ba3cee9da')
-console.log(getTodos())
+//Render todos and summary
+renderTodos()
+
+document.querySelector('#search-todos').addEventListener('input', (e) => {
+    setFilters({
+        searchText: e.target.value
+    })
+    renderTodos(todos, filter)
+})
+
+document.querySelector('#add-todo-form').addEventListener('submit', (e) => {
+    e.preventDefault()
+    const text = e.target.elements.addTodo.value.trim()
+
+    if (text.length > 0) {
+        createTodo(text)
+        renderTodos()
+
+    renderTodos()
+    
+    e.target.elements.addTodo.value = ''
+    }
+})
+
+document.querySelector('#hide-completed').addEventListener('change', (e) => {
+    setFilters({
+        hideCompleted: e.target.checked
+    })
+    renderTodos()
+})
+
+//Change data on duplicate tab / window
+window.addEventListener('storage', (e) => {
+    if (e.key === 'todos') {
+        loadTodos()
+        renderTodos()
+    }
+})
